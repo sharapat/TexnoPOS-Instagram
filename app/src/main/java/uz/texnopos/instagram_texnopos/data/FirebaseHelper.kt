@@ -18,4 +18,19 @@ class FirebaseHelper(private val auth: FirebaseAuth) {
                 onFailure.invoke(it.localizedMessage)
             }
     }
+
+    fun signIn(
+        email: String,
+        password: String,
+        onSuccess: () -> Unit,
+        onFailure: (msg: String?) -> Unit
+    ) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                onSuccess.invoke()
+            }
+            .addOnFailureListener {
+                onFailure.invoke(it.localizedMessage)
+            }
+    }
 }
